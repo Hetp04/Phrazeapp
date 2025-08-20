@@ -553,7 +553,8 @@ export default function ChatDemo() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
+              controls
               style={{
                 width: '100%',
                 height: 'auto',
@@ -564,10 +565,15 @@ export default function ChatDemo() {
               onError={(e) => console.error('Video error:', e)}
               onLoadStart={() => console.log('Video loading started')}
               onCanPlay={() => console.log('Video can play')}
+              onLoadedData={() => console.log('Video data loaded')}
+              onLoad={() => console.log('Video load event')}
             >
               <source src="/video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+            <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
+              Video: /video.mp4 (check console for loading status)
+            </div>
           </div>
         </div>
         
@@ -845,7 +851,8 @@ export default function ChatDemo() {
                     muted
                     loop
                     playsInline
-                    preload="auto"
+                    preload="metadata"
+                    controls
                     style={{
                       width: '100%',
                       height: '180px',
@@ -855,10 +862,15 @@ export default function ChatDemo() {
                     onError={(e) => console.error('Video error:', e)}
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
+                    onLoadedData={() => console.log('Anim video data loaded')}
+                    onLoad={() => console.log('Anim video load event')}
                   >
                     <source src="/anim.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
+                  <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
+                    Video: /anim.mp4 (check console for loading status)
+                  </div>
                 </div>
               </div>
             </div>
