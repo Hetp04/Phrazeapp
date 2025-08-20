@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // This ensures assets use relative paths
+  base: '/Phrazeapp/', // GitHub Pages repository name
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
