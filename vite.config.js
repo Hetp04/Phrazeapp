@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: '/Phrazeapp/', // GitHub Pages repository name
+  base: command === 'serve' ? '/' : '/Phrazeapp/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -25,13 +25,11 @@ export default defineConfig({
         },
       },
     },
-    // Ensure video files are copied to the build output
     copyPublicDir: true,
   },
   server: {
     port: 5500,
     open: true
   },
-  // Add public directory configuration
   publicDir: 'public'
-}) 
+})) 
