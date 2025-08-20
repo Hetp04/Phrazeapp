@@ -544,9 +544,7 @@ export default function ChatDemo() {
               <source src="video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
-              Video: video.mp4
-            </div>
+
           </div>
         </div>
         
