@@ -541,7 +541,7 @@ export default function ChatDemo() {
                 console.log('Video load event');
               }}
             >
-              <source src="/Phrazeapp/video.mp4" type="video/mp4" />
+              <source src={process.env.NODE_ENV === 'production' ? '/Phrazeapp/video.mp4' : '/video.mp4'} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -839,7 +839,7 @@ export default function ChatDemo() {
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
                   >
-                    <source src="/Phrazeapp/anim.mp4" type="video/mp4" />
+                    <source src={process.env.NODE_ENV === 'production' ? '/Phrazeapp/anim.mp4' : '/anim.mp4'} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>

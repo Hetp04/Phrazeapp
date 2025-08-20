@@ -204,7 +204,7 @@ export default function Features() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
                   >
-                    <source src="/Phrazeapp/ant.mp4" type="video/mp4" />
+                    <source src={process.env.NODE_ENV === 'production' ? '/Phrazeapp/ant.mp4' : '/ant.mp4'} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -489,7 +489,7 @@ export default function Features() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
                   >
-                    <source src="/Phrazeapp/hi.mp4" type="video/mp4" />
+                    <source src={process.env.NODE_ENV === 'production' ? '/Phrazeapp/hi.mp4' : '/hi.mp4'} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>

@@ -2877,7 +2877,7 @@ export default function Hero() {
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
                 >
-                  <source src="/Phrazeapp/voice.mp3" type="audio/mpeg" />
+                  <source src={process.env.NODE_ENV === 'production' ? '/Phrazeapp/voice.mp3' : '/voice.mp3'} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
