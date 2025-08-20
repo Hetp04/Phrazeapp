@@ -15,17 +15,20 @@ import html2canvas from 'html2canvas';
 import Groq from 'groq-sdk';
 import waveformSvg from '../../extension/img/waveform.svg';
 
-// Groq API configuration
-const GROQ_API_KEY = await getFirebaseData('groq_api_key');
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-// const GROQ_MODEL = "llama3-8b-8192"; // Easily changeable model variable
-// const GROQ_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"; // Easily changeable model variable
+// Groq API configuration - moved to function to avoid top-level await
+let GROQ_API_KEY = null;
+let groq = null;
+
+async function initializeGroq() {
+  GROQ_API_KEY = await getFirebaseData('groq_api_key');
+  groq = new Groq({
+    apiKey: GROQ_API_KEY,
+    dangerouslyAllowBrowser: true
+  });
+}
 
 // Initialize Groq client
-const groq = new Groq({
-  apiKey: GROQ_API_KEY,
-  dangerouslyAllowBrowser: true
-});
+initializeGroq();
 
 // Helper function to sanitize URL for Firebase path
 function sanitizeFirebasePath(url) {
