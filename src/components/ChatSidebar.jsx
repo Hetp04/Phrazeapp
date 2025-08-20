@@ -596,7 +596,7 @@ export default function ChatSidebar({ onChatSelect, isCollapsed, setIsCollapsed,
             {isLoggedIn && projects.length > 0 && (
               <div style={{ padding: '12px 12px 0', display: 'flex', justifyContent: 'flex-start', marginBottom: '12px' }}>
                 <img 
-                  src="/src/images/star.png" 
+                  src="/star.png" 
                   alt="Logo" 
                   style={{ 
                     width: '34px', 

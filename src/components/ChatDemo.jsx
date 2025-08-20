@@ -560,7 +560,7 @@ export default function ChatDemo() {
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
               }}
             >
-              <source src="/src/images/video.mp4" type="video/mp4" />
+              <source src="/video.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
