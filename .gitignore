@@ -1,6 +1,4 @@
 # Large video files excluded from git
-public/video.mov
-src/images/tran.mov
 
 # Dependencies
 node_modules/
