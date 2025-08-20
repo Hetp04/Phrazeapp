@@ -527,105 +527,25 @@ export default function ChatDemo() {
               }}
               onError={(e) => {
                 console.error('Video error:', e);
-                console.error('Video error details:', {
-                  error: e.target.error,
-                  networkState: e.target.networkState,
-                  readyState: e.target.readyState,
-                  src: e.target.src,
-                  currentSrc: e.target.currentSrc
-                });
-                // Update status indicator
-                const statusEl = document.getElementById('video-status');
-                if (statusEl) {
-                  statusEl.textContent = 'Error loading video';
-                  statusEl.style.color = '#e74c3c';
-                }
               }}
               onLoadStart={() => {
                 console.log('Video loading started');
-                const statusEl = document.getElementById('video-status');
-                if (statusEl) {
-                  statusEl.textContent = 'Loading...';
-                  statusEl.style.color = '#f39c12';
-                }
               }}
               onCanPlay={() => {
                 console.log('Video can play');
-                const statusEl = document.getElementById('video-status');
-                if (statusEl) {
-                  statusEl.textContent = 'Ready to play';
-                  statusEl.style.color = '#27ae60';
-                }
               }}
               onLoadedData={() => {
                 console.log('Video data loaded');
-                const statusEl = document.getElementById('video-status');
-                if (statusEl) {
-                  statusEl.textContent = 'Data loaded';
-                  statusEl.style.color = '#27ae60';
-                }
               }}
               onLoad={() => {
                 console.log('Video load event');
-                const statusEl = document.getElementById('video-status');
-                if (statusEl) {
-                  statusEl.textContent = 'Loaded';
-                  statusEl.style.color = '#27ae60';
-                }
               }}
             >
               <source src="video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
-              Video: /video.mp4 (check console for loading status)
-            </div>
-            {/* Video Status Indicator */}
-            <div style={{ 
-              fontSize: '11px', 
-              color: '#999', 
-              textAlign: 'center', 
-              marginTop: '4px',
-              padding: '4px 8px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '4px',
-              fontFamily: 'monospace'
-            }}>
-              Status: <span id="video-status">Loading...</span>
-            </div>
-            {/* Video Test Button */}
-            <div style={{ 
-              textAlign: 'center', 
-              marginTop: '8px' 
-            }}>
-              <button
-                onClick={() => {
-                  console.log('Testing video paths...');
-                  const testVideo = document.createElement('video');
-                  testVideo.preload = 'metadata';
-                  
-                  const testPaths = ['video.mp4', '/video.mp4', './video.mp4'];
-                  testPaths.forEach((path, index) => {
-                    setTimeout(() => {
-                      console.log(`Testing path: ${path}`);
-                      testVideo.src = path;
-                      testVideo.onerror = (e) => console.error(`Error with ${path}:`, e);
-                      testVideo.oncanplay = () => console.log(`Success with ${path}`);
-                    }, index * 1000);
-                  });
-                }}
-                style={{
-                  padding: '4px 8px',
-                  fontSize: '10px',
-                  backgroundColor: '#f8f9fa',
-                  border: '1px solid #dee2e6',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  fontFamily: 'monospace'
-                }}
-              >
-                Test Video Paths
-              </button>
+              Video: video.mp4
             </div>
           </div>
         </div>

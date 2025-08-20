@@ -22,10 +22,6 @@ function App() {
   };
   
   useEffect(() => {
-    console.log('App component mounted');
-    console.log('NODE_ENV:', process.env.NODE_ENV);
-    console.log('Basename will be:', process.env.NODE_ENV === 'production' ? '/Phrazeapp' : '/');
-    
     // Check if user has seen the preloader before
     const hasSeenPreloader = localStorage.getItem('hasSeenPreloader');
     
@@ -42,8 +38,6 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, []);
-
-  console.log('App rendering, loading:', loading);
 
   return (
     <ExtensionProvider>
