@@ -155,7 +155,6 @@ export default function ShareModal({ isOpen, onClose }) {
           fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif', color: '#111827',
           overflow: 'hidden',
           opacity: fadeIn ? 1 : 0,
-          position: 'fixed',
           left: anchor ? `${anchor.left}px` : '50%',
           top: anchor ? `${anchor.top}px` : '50%',
           transform: 'translate(-50%, -50%)',
