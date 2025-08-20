@@ -30,7 +30,6 @@ export default function ChatDemo() {
   const messagesRef = useRef(null);
   const scrollIntervalRef = useRef(null);
   const videoRef = useRef(null);
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   // Add CSS styles for FAQ animations
   useEffect(() => {
@@ -41,115 +40,6 @@ export default function ChatDemo() {
     return () => {
       document.head.removeChild(style);
     };
-  }, []);
-
-  // Video autoplay handling with user interaction fallback
-  useEffect(() => {
-    const handleVideoAutoplay = async () => {
-      if (videoRef.current) {
-        try {
-          // Wait for video to be ready
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-          // Check if video is ready to play
-          if (videoRef.current.readyState >= 2) {
-            await videoRef.current.play();
-            console.log('Main video autoplay successful');
-          } else {
-            console.log('Main video not ready yet, waiting...');
-            // Wait for canplay event
-            videoRef.current.addEventListener('canplay', async () => {
-              try {
-                await videoRef.current.play();
-                console.log('Main video autoplay successful after canplay');
-              } catch (error) {
-                console.log('Main video autoplay failed after canplay:', error);
-              }
-            }, { once: true });
-          }
-        } catch (error) {
-          console.log('Main video autoplay failed:', error);
-          // Try again after user interaction
-          const handleUserInteraction = async () => {
-            try {
-              await videoRef.current.play();
-              console.log('Main video autoplay successful after user interaction');
-              document.removeEventListener('click', handleUserInteraction);
-              document.removeEventListener('keydown', handleUserInteraction);
-            } catch (error) {
-              console.log('Main video autoplay failed after user interaction:', error);
-            }
-          };
-          
-          document.addEventListener('click', handleUserInteraction);
-          document.addEventListener('keydown', handleUserInteraction);
-        }
-      }
-    };
-
-    // Try autoplay after component mounts
-    handleVideoAutoplay();
-  }, []);
-
-  // Add video loading test
-  useEffect(() => {
-    const testVideoLoading = () => {
-      console.log('=== Starting Video Loading Test ===');
-      
-      const testVideo = document.createElement('video');
-      testVideo.preload = 'metadata';
-      
-      testVideo.onloadstart = () => console.log('Test video load started');
-      testVideo.oncanplay = () => console.log('Test video can play');
-      testVideo.onerror = (e) => {
-        console.error('Test video error:', e);
-        console.error('Test video error details:', {
-          error: e.target.error,
-          networkState: e.target.networkState,
-          readyState: e.target.readyState,
-          src: e.target.src,
-          currentSrc: e.target.currentSrc
-        });
-      };
-      
-      // Test different video paths
-      const testPaths = ['video.mp4', '/video.mp4', './video.mp4'];
-      testPaths.forEach((path, index) => {
-        setTimeout(() => {
-          console.log(`Testing video path: ${path}`);
-          testVideo.src = path;
-          
-          // Check if video loads successfully
-          setTimeout(() => {
-            if (testVideo.readyState >= 2) {
-              console.log(`✅ Path ${path} works!`);
-            } else {
-              console.log(`❌ Path ${path} failed to load`);
-            }
-          }, 2000);
-        }, index * 3000);
-      });
-      
-      // Also test with fetch to check if files are accessible
-      testPaths.forEach((path, index) => {
-        setTimeout(async () => {
-          try {
-            console.log(`Fetching ${path}...`);
-            const response = await fetch(path);
-            if (response.ok) {
-              console.log(`✅ Fetch ${path} successful: ${response.status}`);
-            } else {
-              console.log(`❌ Fetch ${path} failed: ${response.status}`);
-            }
-          } catch (error) {
-            console.error(`❌ Fetch ${path} error:`, error);
-          }
-        }, index * 3000 + 1000);
-      });
-    };
-
-    // Run test after component mounts
-    setTimeout(testVideoLoading, 1000);
   }, []);
 
   // Hover detection using mouse events on the container
@@ -219,41 +109,6 @@ export default function ChatDemo() {
       stopAutoScroll();
     };
   }, [isHovered]);
-
-  // Intersection Observer to control video playback
-  useEffect(() => {
-    const videoObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVideoVisible(true);
-            if (videoRef.current) {
-              videoRef.current.play();
-            }
-          } else {
-            setIsVideoVisible(false);
-            if (videoRef.current) {
-              videoRef.current.pause();
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Video plays when 50% visible
-        rootMargin: '-10% 0px -10% 0px' // Adjust trigger area
-      }
-    );
-
-    if (videoRef.current) {
-      videoObserver.observe(videoRef.current);
-    }
-
-    return () => {
-      if (videoRef.current) {
-        videoObserver.unobserve(videoRef.current);
-      }
-    };
-  }, []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -661,7 +516,8 @@ export default function ChatDemo() {
               muted
               loop
               playsInline
-              preload="metadata"
+              autoPlay
+              preload="auto"
               style={{
                 width: '100%',
                 height: 'auto',
@@ -700,7 +556,6 @@ export default function ChatDemo() {
                   statusEl.textContent = 'Ready to play';
                   statusEl.style.color = '#27ae60';
                 }
-                // Don't try to play immediately - let the useEffect handle it
               }}
               onLoadedData={() => {
                 console.log('Video data loaded');
@@ -720,8 +575,6 @@ export default function ChatDemo() {
               }}
             >
               <source src="video.mp4" type="video/mp4" />
-              <source src="/video.mp4" type="video/mp4" />
-              <source src="./video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
@@ -1050,7 +903,8 @@ export default function ChatDemo() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    autoPlay
+                    preload="auto"
                     style={{
                       width: '100%',
                       height: '180px',
@@ -1070,14 +924,11 @@ export default function ChatDemo() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => {
                       console.log('Anim video can play');
-                      // Don't try to play immediately - let the useEffect handle it
                     }}
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
                   >
                     <source src="anim.mp4" type="video/mp4" />
-                    <source src="/anim.mp4" type="video/mp4" />
-                    <source src="./anim.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>

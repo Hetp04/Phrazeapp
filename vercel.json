@@ -23,7 +23,7 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "video/mp4"
+          "value": "video/mp4; charset=utf-8"
         },
         {
           "key": "Accept-Ranges",
@@ -32,6 +32,14 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Range, Accept-Ranges"
         },
         {
           "key": "Cache-Control",
@@ -44,7 +52,7 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "video/quicktime"
+          "value": "video/quicktime; charset=utf-8"
         },
         {
           "key": "Accept-Ranges",
@@ -53,6 +61,14 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Range, Accept-Ranges"
         },
         {
           "key": "Cache-Control",
@@ -65,7 +81,7 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "video/webm"
+          "value": "video/webm; charset=utf-8"
         },
         {
           "key": "Accept-Ranges",
@@ -74,6 +90,14 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Range, Accept-Ranges"
         },
         {
           "key": "Cache-Control",

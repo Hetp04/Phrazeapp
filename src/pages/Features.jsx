@@ -212,8 +212,6 @@ export default function Features() {
                     onCanPlay={() => console.log('Video can play')}
                   >
                     <source src="ant.mp4" type="video/mp4" />
-                    <source src="/ant.mp4" type="video/mp4" />
-                    <source src="./ant.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -506,8 +504,6 @@ export default function Features() {
                     onCanPlay={() => console.log('Video can play')}
                   >
                     <source src="hi.mp4" type="video/mp4" />
-                    <source src="/hi.mp4" type="video/mp4" />
-                    <source src="./hi.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
