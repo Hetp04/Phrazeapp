@@ -41,7 +41,7 @@ function App() {
 
   return (
     <ExtensionProvider>
-      <Router basename={process.env.NODE_ENV === 'production' ? '/Phrazeapp' : '/'}>
+              <Router basename={process.env.NODE_ENV === 'production' ? '/Phrazeapp' : '/'}>
         {loading ? (
           <Preloader />
         ) : (
