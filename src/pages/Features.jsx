@@ -187,7 +187,7 @@ export default function Features() {
                   height: '100%'
                 }}>
                   <video 
-                    src="/video.mov" 
+                    src="/ant.mp4" 
                     style={{
                       width: '100%',
                       height: '95%',

@@ -560,7 +560,7 @@ export default function ChatDemo() {
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
               }}
             >
-              <source src="/video.mov" type="video/quicktime" />
+              <source src="/video.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -846,7 +846,7 @@ export default function ChatDemo() {
                       objectFit: 'cover'
                     }}
                   >
-                    <source src="/tran.mov" type="video/quicktime" />
+                    <source src="/anim.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
