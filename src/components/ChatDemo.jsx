@@ -541,7 +541,7 @@ export default function ChatDemo() {
                 console.log('Video load event');
               }}
             >
-              <source src="/ant.mp4" type="video/mp4" />
+              <source src="/video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -839,11 +839,11 @@ export default function ChatDemo() {
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
                   >
-                    <source src="/ant.mp4" type="video/mp4" />
+                    <source src="/anim.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
-                    Video: ant.mp4
+                    Video: anim.mp4
                   </div>
                 </div>
               </div>
