@@ -43,17 +43,46 @@ export default function ChatDemo() {
     };
   }, []);
 
-  // Video autoplay handling
+  // Video autoplay handling with user interaction fallback
   useEffect(() => {
     const handleVideoAutoplay = async () => {
       if (videoRef.current) {
         try {
-          // Wait a bit for the video to be ready
-          await new Promise(resolve => setTimeout(resolve, 100));
-          await videoRef.current.play();
-          console.log('Main video autoplay successful');
+          // Wait for video to be ready
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          // Check if video is ready to play
+          if (videoRef.current.readyState >= 2) {
+            await videoRef.current.play();
+            console.log('Main video autoplay successful');
+          } else {
+            console.log('Main video not ready yet, waiting...');
+            // Wait for canplay event
+            videoRef.current.addEventListener('canplay', async () => {
+              try {
+                await videoRef.current.play();
+                console.log('Main video autoplay successful after canplay');
+              } catch (error) {
+                console.log('Main video autoplay failed after canplay:', error);
+              }
+            }, { once: true });
+          }
         } catch (error) {
           console.log('Main video autoplay failed:', error);
+          // Try again after user interaction
+          const handleUserInteraction = async () => {
+            try {
+              await videoRef.current.play();
+              console.log('Main video autoplay successful after user interaction');
+              document.removeEventListener('click', handleUserInteraction);
+              document.removeEventListener('keydown', handleUserInteraction);
+            } catch (error) {
+              console.log('Main video autoplay failed after user interaction:', error);
+            }
+          };
+          
+          document.addEventListener('click', handleUserInteraction);
+          document.addEventListener('keydown', handleUserInteraction);
         }
       }
     };
@@ -583,10 +612,7 @@ export default function ChatDemo() {
               onLoadStart={() => console.log('Video loading started')}
               onCanPlay={() => {
                 console.log('Video can play');
-                // Try to play the video after it's ready
-                if (videoRef.current) {
-                  videoRef.current.play().catch(err => console.log('Autoplay failed:', err));
-                }
+                // Don't try to play immediately - let the useEffect handle it
               }}
               onLoadedData={() => console.log('Video data loaded')}
               onLoad={() => console.log('Video load event')}
@@ -884,9 +910,7 @@ export default function ChatDemo() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => {
                       console.log('Anim video can play');
-                      // Try to play the video after it's ready
-                      const video = e.target;
-                      video.play().catch(err => console.log('Anim autoplay failed:', err));
+                      // Don't try to play immediately - let the useEffect handle it
                     }}
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
