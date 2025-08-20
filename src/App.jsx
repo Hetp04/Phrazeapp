@@ -15,13 +15,17 @@ import { ExtensionProvider } from './context/ExtensionContext';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [currentProject, setCurrentProject] = useState('default'); // Add state for currentProject
+  const [currentProject, setCurrentProject] = useState('default');
 
   const onProjectChange = (newProject) => {
-    setCurrentProject(newProject); // Update currentProject state
+    setCurrentProject(newProject);
   };
   
   useEffect(() => {
+    console.log('App component mounted');
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('Basename will be:', process.env.NODE_ENV === 'production' ? '/Phrazeapp' : '/');
+    
     // Check if user has seen the preloader before
     const hasSeenPreloader = localStorage.getItem('hasSeenPreloader');
     
@@ -39,9 +43,11 @@ function App() {
     }
   }, []);
 
+  console.log('App rendering, loading:', loading);
+
   return (
     <ExtensionProvider>
-      <Router>
+      <Router basename={process.env.NODE_ENV === 'production' ? '/Phrazeapp' : '/'}>
         {loading ? (
           <Preloader />
         ) : (

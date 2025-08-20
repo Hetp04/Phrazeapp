@@ -6,6 +6,8 @@ import Demonstration from '../components/Demonstration';
 
 export default function Home() {
   useEffect(() => {
+    console.log('Home component mounted');
+    
     // Intersection Observer for demo sections
     const demoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -31,6 +33,8 @@ export default function Home() {
       });
     };
   }, []);
+
+  console.log('Home component rendering');
 
   return (
     <main style={{ 
