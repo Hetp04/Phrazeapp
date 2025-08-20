@@ -9,7 +9,7 @@ import priyaImg from '../images/priya.png';
 function DemoPreviewThread({ disableScroll = false, maxMessages, instant = false, swipeToBlankOnHighlightEnd = false, forceFinalSnapshot = false }) {
   // Simple, technical topic: environment variables for API keys (client vs server)
   const baseRows = [
-    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Hey! I'm having trouble with API authentication in my React app." },
+    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Hey! I am having trouble with API authentication in my React app." },
     { role: 'assistant', name: 'phraze', initials: 'P', text: "I can help with that! What specific API are you trying to integrate?" },
     { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Weather API - keeps returning 401 errors. Where should I put the API key?" },
     { role: 'assistant', name: 'phraze', initials: 'P', text: "Create a .env file and add VITE_WEATHER_API_KEY=your_key. Access it with import.meta.env.VITE_WEATHER_API_KEY. Never commit the key-add .env to .gitignore!" },
@@ -19,7 +19,7 @@ function DemoPreviewThread({ disableScroll = false, maxMessages, instant = false
     { role: 'assistant', name: 'phraze', initials: 'P', text: "Put the key in your Node server .env and call the upstream API from the server. The client calls your /weather endpoint, and the server adds the key via process.env.WEATHER_API_KEY." },
     // @mention messages (assistant should not respond to these)
     { role: 'user', name: 'Jin Liner', initials: 'JL', text: "@Alex Kim can you update the README with an .env example for VITE_WEATHER_API_KEY?" },
-    { role: 'user', name: 'Alex Kim', initials: 'AK', text: "@Jin Liner Yep, on it. I'll add the var name and a short note on import.meta.env usage." },
+    { role: 'user', name: 'Alex Kim', initials: 'AK', text: "@Jin Liner I will add the var name and note on import.meta.env usage." },
     // Normal user message (no @) - AI should reply
     { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Got it. Client uses import.meta.env in dev, server proxy in prod. Works now-thanks!" },
     { role: 'assistant', name: 'phraze', initials: 'P', text: "Great! Glad it's working. Keep secrets out of the client when possible and rotate API keys if they ever leak." },
