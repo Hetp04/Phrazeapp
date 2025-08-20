@@ -43,6 +43,25 @@ export default function ChatDemo() {
     };
   }, []);
 
+  // Video autoplay handling
+  useEffect(() => {
+    const handleVideoAutoplay = async () => {
+      if (videoRef.current) {
+        try {
+          // Wait a bit for the video to be ready
+          await new Promise(resolve => setTimeout(resolve, 100));
+          await videoRef.current.play();
+          console.log('Main video autoplay successful');
+        } catch (error) {
+          console.log('Main video autoplay failed:', error);
+        }
+      }
+    };
+
+    // Try autoplay after component mounts
+    handleVideoAutoplay();
+  }, []);
+
   // Hover detection using mouse events on the container
   useEffect(() => {
     const messagesElement = messagesRef.current;
@@ -549,12 +568,10 @@ export default function ChatDemo() {
           }}>
             <video
               ref={videoRef}
-              autoPlay
               muted
               loop
               playsInline
               preload="metadata"
-              controls
               style={{
                 width: '100%',
                 height: 'auto',
@@ -564,7 +581,13 @@ export default function ChatDemo() {
               }}
               onError={(e) => console.error('Video error:', e)}
               onLoadStart={() => console.log('Video loading started')}
-              onCanPlay={() => console.log('Video can play')}
+              onCanPlay={() => {
+                console.log('Video can play');
+                // Try to play the video after it's ready
+                if (videoRef.current) {
+                  videoRef.current.play().catch(err => console.log('Autoplay failed:', err));
+                }
+              }}
               onLoadedData={() => console.log('Video data loaded')}
               onLoad={() => console.log('Video load event')}
             >
@@ -847,12 +870,10 @@ export default function ChatDemo() {
                 }}>
                   {/* Video Animation */}
                   <video
-                    autoPlay
                     muted
                     loop
                     playsInline
                     preload="metadata"
-                    controls
                     style={{
                       width: '100%',
                       height: '180px',
@@ -861,7 +882,12 @@ export default function ChatDemo() {
                     }}
                     onError={(e) => console.error('Video error:', e)}
                     onLoadStart={() => console.log('Video loading started')}
-                    onCanPlay={() => console.log('Video can play')}
+                    onCanPlay={() => {
+                      console.log('Anim video can play');
+                      // Try to play the video after it's ready
+                      const video = e.target;
+                      video.play().catch(err => console.log('Anim autoplay failed:', err));
+                    }}
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
                   >
