@@ -101,7 +101,7 @@ export default function Features() {
                   height: '100%'
                 }}>
                   <img 
-                    src="/projects.png" 
+                    src="projects.png" 
                     alt="Project organization interface"
                     style={{
                       width: '100%',
@@ -299,7 +299,7 @@ export default function Features() {
                   height: '100%'
                 }}>
                   <img 
-                    src="/type.png" 
+                    src="type.png" 
                     alt="Export annotation data options"
                     style={{
                       width: '100%',
@@ -385,7 +385,7 @@ export default function Features() {
                   height: '100%'
                 }}>
                   <img 
-                    src="/history.png" 
+                    src="history.png" 
                     alt="Annotation history and management interface"
                     style={{
                       width: '100%',
@@ -609,7 +609,7 @@ export default function Features() {
                         gap: '0.5rem',
                         justifyContent: 'flex-end'
                       }}>
-                        <img src="/maya.png" alt="Jin Liner" style={{
+                        <img src="maya.png" alt="Jin Liner" style={{
                           width: '18px',
                           height: '18px',
                           borderRadius: '50%',
@@ -786,7 +786,7 @@ export default function Features() {
                         gap: '0.5rem',
                         justifyContent: 'flex-end'
                       }}>
-                        <img src="/alex.png" alt="Alex Chen" style={{
+                        <img src="alex.png" alt="Alex Chen" style={{
                           width: '18px',
                           height: '18px',
                           borderRadius: '50%',
@@ -946,7 +946,7 @@ export default function Features() {
                         gap: '0.5rem',
                         justifyContent: 'flex-end'
                       }}>
-                        <img src="/maya.png" alt="Jin Liner" style={{
+                        <img src="maya.png" alt="Jin Liner" style={{
                           width: '18px',
                           height: '18px',
                           borderRadius: '50%',
@@ -1064,7 +1064,7 @@ export default function Features() {
                         gap: '0.5rem',
                         justifyContent: 'flex-end'
                       }}>
-                        <img src="/alex.png" alt="Alex Chen" style={{
+                        <img src="alex.png" alt="Alex Chen" style={{
                           width: '18px',
                           height: '18px',
                           borderRadius: '50%',
