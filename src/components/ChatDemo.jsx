@@ -549,11 +549,11 @@ export default function ChatDemo() {
           }}>
             <video
               ref={videoRef}
+              autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
-              controls
+              preload="auto"
               style={{
                 width: '100%',
                 height: 'auto',
@@ -562,6 +562,8 @@ export default function ChatDemo() {
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
               }}
               onError={(e) => console.error('Video error:', e)}
+              onLoadStart={() => console.log('Video loading started')}
+              onCanPlay={() => console.log('Video can play')}
             >
               <source src="/video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -843,8 +845,7 @@ export default function ChatDemo() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
-                    controls
+                    preload="auto"
                     style={{
                       width: '100%',
                       height: '180px',
@@ -852,6 +853,8 @@ export default function ChatDemo() {
                       objectFit: 'cover'
                     }}
                     onError={(e) => console.error('Video error:', e)}
+                    onLoadStart={() => console.log('Video loading started')}
+                    onCanPlay={() => console.log('Video can play')}
                   >
                     <source src="/anim.mp4" type="video/mp4" />
                     Your browser does not support the video tag.

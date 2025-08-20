@@ -198,9 +198,10 @@ export default function Features() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
-                    controls
+                    preload="auto"
                     onError={(e) => console.error('Video error:', e)}
+                    onLoadStart={() => console.log('Video loading started')}
+                    onCanPlay={() => console.log('Video can play')}
                   >
                     Your browser does not support the video tag.
                   </video>
@@ -480,9 +481,10 @@ export default function Features() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
-                    controls
+                    preload="auto"
                     onError={(e) => console.error('Video error:', e)}
+                    onLoadStart={() => console.log('Video loading started')}
+                    onCanPlay={() => console.log('Video can play')}
                   >
                     Your browser does not support the video tag.
                   </video>
