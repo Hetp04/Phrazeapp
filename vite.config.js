@@ -25,9 +25,13 @@ export default defineConfig({
         },
       },
     },
+    // Ensure video files are copied to the build output
+    copyPublicDir: true,
   },
   server: {
     port: 5500,
     open: true
-  }
+  },
+  // Add public directory configuration
+  publicDir: 'public'
 }) 

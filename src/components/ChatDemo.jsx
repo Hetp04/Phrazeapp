@@ -91,6 +91,67 @@ export default function ChatDemo() {
     handleVideoAutoplay();
   }, []);
 
+  // Add video loading test
+  useEffect(() => {
+    const testVideoLoading = () => {
+      console.log('=== Starting Video Loading Test ===');
+      
+      const testVideo = document.createElement('video');
+      testVideo.preload = 'metadata';
+      
+      testVideo.onloadstart = () => console.log('Test video load started');
+      testVideo.oncanplay = () => console.log('Test video can play');
+      testVideo.onerror = (e) => {
+        console.error('Test video error:', e);
+        console.error('Test video error details:', {
+          error: e.target.error,
+          networkState: e.target.networkState,
+          readyState: e.target.readyState,
+          src: e.target.src,
+          currentSrc: e.target.currentSrc
+        });
+      };
+      
+      // Test different video paths
+      const testPaths = ['video.mp4', '/video.mp4', './video.mp4'];
+      testPaths.forEach((path, index) => {
+        setTimeout(() => {
+          console.log(`Testing video path: ${path}`);
+          testVideo.src = path;
+          
+          // Check if video loads successfully
+          setTimeout(() => {
+            if (testVideo.readyState >= 2) {
+              console.log(`✅ Path ${path} works!`);
+            } else {
+              console.log(`❌ Path ${path} failed to load`);
+            }
+          }, 2000);
+        }, index * 3000);
+      });
+      
+      // Also test with fetch to check if files are accessible
+      testPaths.forEach((path, index) => {
+        setTimeout(async () => {
+          try {
+            console.log(`Fetching ${path}...`);
+            const response = await fetch(path);
+            if (response.ok) {
+              console.log(`✅ Fetch ${path} successful: ${response.status}`);
+            } else {
+              console.log(`❌ Fetch ${path} failed: ${response.status}`);
+            }
+          } catch (error) {
+            console.error(`❌ Fetch ${path} error:`, error);
+          }
+        }, index * 3000 + 1000);
+      });
+    };
+
+    // Run test after component mounts
+    setTimeout(testVideoLoading, 1000);
+  }, []);
+
   // Hover detection using mouse events on the container
   useEffect(() => {
     const messagesElement = messagesRef.current;
@@ -608,20 +669,110 @@ export default function ChatDemo() {
                 borderRadius: '12px',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
               }}
-              onError={(e) => console.error('Video error:', e)}
-              onLoadStart={() => console.log('Video loading started')}
+              onError={(e) => {
+                console.error('Video error:', e);
+                console.error('Video error details:', {
+                  error: e.target.error,
+                  networkState: e.target.networkState,
+                  readyState: e.target.readyState,
+                  src: e.target.src,
+                  currentSrc: e.target.currentSrc
+                });
+                // Update status indicator
+                const statusEl = document.getElementById('video-status');
+                if (statusEl) {
+                  statusEl.textContent = 'Error loading video';
+                  statusEl.style.color = '#e74c3c';
+                }
+              }}
+              onLoadStart={() => {
+                console.log('Video loading started');
+                const statusEl = document.getElementById('video-status');
+                if (statusEl) {
+                  statusEl.textContent = 'Loading...';
+                  statusEl.style.color = '#f39c12';
+                }
+              }}
               onCanPlay={() => {
                 console.log('Video can play');
+                const statusEl = document.getElementById('video-status');
+                if (statusEl) {
+                  statusEl.textContent = 'Ready to play';
+                  statusEl.style.color = '#27ae60';
+                }
                 // Don't try to play immediately - let the useEffect handle it
               }}
-              onLoadedData={() => console.log('Video data loaded')}
-              onLoad={() => console.log('Video load event')}
+              onLoadedData={() => {
+                console.log('Video data loaded');
+                const statusEl = document.getElementById('video-status');
+                if (statusEl) {
+                  statusEl.textContent = 'Data loaded';
+                  statusEl.style.color = '#27ae60';
+                }
+              }}
+              onLoad={() => {
+                console.log('Video load event');
+                const statusEl = document.getElementById('video-status');
+                if (statusEl) {
+                  statusEl.textContent = 'Loaded';
+                  statusEl.style.color = '#27ae60';
+                }
+              }}
             >
+              <source src="video.mp4" type="video/mp4" />
               <source src="/video.mp4" type="video/mp4" />
+              <source src="./video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
               Video: /video.mp4 (check console for loading status)
+            </div>
+            {/* Video Status Indicator */}
+            <div style={{ 
+              fontSize: '11px', 
+              color: '#999', 
+              textAlign: 'center', 
+              marginTop: '4px',
+              padding: '4px 8px',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '4px',
+              fontFamily: 'monospace'
+            }}>
+              Status: <span id="video-status">Loading...</span>
+            </div>
+            {/* Video Test Button */}
+            <div style={{ 
+              textAlign: 'center', 
+              marginTop: '8px' 
+            }}>
+              <button
+                onClick={() => {
+                  console.log('Testing video paths...');
+                  const testVideo = document.createElement('video');
+                  testVideo.preload = 'metadata';
+                  
+                  const testPaths = ['video.mp4', '/video.mp4', './video.mp4'];
+                  testPaths.forEach((path, index) => {
+                    setTimeout(() => {
+                      console.log(`Testing path: ${path}`);
+                      testVideo.src = path;
+                      testVideo.onerror = (e) => console.error(`Error with ${path}:`, e);
+                      testVideo.oncanplay = () => console.log(`Success with ${path}`);
+                    }, index * 1000);
+                  });
+                }}
+                style={{
+                  padding: '4px 8px',
+                  fontSize: '10px',
+                  backgroundColor: '#f8f9fa',
+                  border: '1px solid #dee2e6',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontFamily: 'monospace'
+                }}
+              >
+                Test Video Paths
+              </button>
             </div>
           </div>
         </div>
@@ -906,7 +1057,16 @@ export default function ChatDemo() {
                       borderRadius: '8px',
                       objectFit: 'cover'
                     }}
-                    onError={(e) => console.error('Video error:', e)}
+                    onError={(e) => {
+                      console.error('Anim video error:', e);
+                      console.error('Anim video error details:', {
+                        error: e.target.error,
+                        networkState: e.target.networkState,
+                        readyState: e.target.readyState,
+                        src: e.target.src,
+                        currentSrc: e.target.currentSrc
+                      });
+                    }}
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => {
                       console.log('Anim video can play');
@@ -915,7 +1075,9 @@ export default function ChatDemo() {
                     onLoadedData={() => console.log('Anim video data loaded')}
                     onLoad={() => console.log('Anim video load event')}
                   >
+                    <source src="anim.mp4" type="video/mp4" />
                     <source src="/anim.mp4" type="video/mp4" />
+                    <source src="./anim.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
