@@ -204,7 +204,7 @@ export default function Features() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
                   >
-                    <source src={`${import.meta.env.BASE_URL}ant.mp4`} type="video/mp4" />
+                    <source src="ant.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -489,7 +489,7 @@ export default function Features() {
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
                   >
-                    <source src={`${import.meta.env.BASE_URL}hi.mp4`} type="video/mp4" />
+                    <source src="hi.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>

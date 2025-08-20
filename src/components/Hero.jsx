@@ -2877,7 +2877,7 @@ export default function Hero() {
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
                 >
-                  <source src={`${import.meta.env.BASE_URL}voice.mp3`} type="audio/mpeg" />
+                  <source src="voice.mp3" type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
