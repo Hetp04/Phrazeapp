@@ -7,25 +7,12 @@ import priyaImg from '../images/priya.png';
 
 // Preview thread that uses the exact row styles from Demonstration.jsx
 function DemoPreviewThread({ disableScroll = false, maxMessages, instant = false, swipeToBlankOnHighlightEnd = false, forceFinalSnapshot = false }) {
-  // Simple, technical topic: environment variables for API keys (client vs server)
+  // Simple chat demo with clean, safe content
   const baseRows = [
     { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Hey! I am having trouble with API authentication in my React app." },
     { role: 'assistant', name: 'phraze', initials: 'P', text: "I can help with that! What specific API are you trying to integrate?" },
-    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Weather API - keeps returning 401 errors. Where should I put the API key?" },
-    { role: 'assistant', name: 'phraze', initials: 'P', text: "Create a .env file and add VITE_WEATHER_API_KEY=your_key. Access it with import.meta.env.VITE_WEATHER_API_KEY. Never commit the key-add .env to .gitignore!" },
-    { role: 'user', name: 'Alex Kim', initials: 'AK', text: "Do we need to restart the dev server after changing .env?" },
-    { role: 'assistant', name: 'phraze', initials: 'P', text: "Yes. Env vars are loaded at startup. Stop and rerun npm run dev so Vite picks up the change." },
-    { role: 'user', name: 'Paige Lamar', initials: 'PL', text: "What if we don't want the key in the browser at all?" },
-    { role: 'assistant', name: 'phraze', initials: 'P', text: "Put the key in your Node server .env and call the upstream API from the server. The client calls your /weather endpoint, and the server adds the key via process.env.WEATHER_API_KEY." },
-    // @mention messages (assistant should not respond to these)
-    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "@Alex Kim can you update the README with an .env example for VITE_WEATHER_API_KEY?" },
-    { role: 'user', name: 'Alex Kim', initials: 'AK', text: "@Jin Liner I will add the var name and note on import.meta.env usage." },
-    // Normal user message (no @) - AI should reply
-    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Got it. Client uses import.meta.env in dev, server proxy in prod. Works now-thanks!" },
-    { role: 'assistant', name: 'phraze', initials: 'P', text: "Great! Glad it's working. Keep secrets out of the client when possible and rotate API keys if they ever leak." },
-    // Final Q&A where AI replies
-    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "One more: how do we handle different API keys per environment?" },
-    { role: 'assistant', name: 'phraze', initials: 'P', text: "Use separate files like .env.development and .env.production, or set env vars per environment in your hosting provider. Prefix with VITE_ for keys needed in the client; keep server-only secrets unprefixed and access via process.env on the server." },
+    { role: 'user', name: 'Jin Liner', initials: 'JL', text: "Weather API keeps returning 401 errors. Where should I put the API key?" },
+    { role: 'assistant', name: 'phraze', initials: 'P', text: "Create a .env file and add VITE_WEATHER_API_KEY=your_key. Access it with import.meta.env.VITE_WEATHER_API_KEY. Never commit the key." },
   ];
 
   const demoRows = Array.isArray(baseRows)
@@ -692,11 +679,11 @@ function DemoPreviewThread({ disableScroll = false, maxMessages, instant = false
     // Check if this is the first message that should be highlighted
     const isHighlightTarget = role === 'user' && 
       name === 'Jin Liner' && 
-      children === "Hey! I'm having trouble with API authentication in my React app.";
+      children === "Hey! I am having trouble with API authentication in my React app.";
     // The third Jin Liner message that should receive a second animated highlight/pill after the first pill appears
     const isSecondTarget = role === 'user' &&
       name === 'Jin Liner' &&
-      children === 'Weather API - keeps returning 401 errors. Where should I put the API key?';
+      children === 'Weather API keeps returning 401 errors. Where should I put the API key?';
     
     const renderHighlightedText = (text) => {
       if (!isHighlightTarget && !isSecondTarget) {
@@ -2631,7 +2618,7 @@ export default function Hero() {
                       <span style="font-size: 12px; color: #6b7280;">User:</span>
                       <span style="font-size: 12px; color: #111827; font-weight: 600;">Jin Liner</span>
                     </div>
-                    <mark style="background: #fef08a; padding: 2px 4px;">Weather API - keeps returning 401 errors. Where should I put the API key?</mark>
+                    <mark style="background: #fef08a; padding: 2px 4px;">Weather API keeps returning 401 errors. Where should I put the API key?</mark>
                     <div style="margin-top: 10px; color: #374151; opacity: 0.95;">Also, the docs mention rotating keys regularly and avoiding client-side exposure when possible.</div>
                   </div>
                 </div>
