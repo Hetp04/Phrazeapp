@@ -198,7 +198,11 @@ export default function Features() {
                     muted
                     loop
                     playsInline
+                    preload="metadata"
+                    controls
+                    onError={(e) => console.error('Video error:', e)}
                   >
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
@@ -476,7 +480,11 @@ export default function Features() {
                     muted
                     loop
                     playsInline
+                    preload="metadata"
+                    controls
+                    onError={(e) => console.error('Video error:', e)}
                   >
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>

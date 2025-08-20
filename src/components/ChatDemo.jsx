@@ -552,6 +552,8 @@ export default function ChatDemo() {
               muted
               loop
               playsInline
+              preload="metadata"
+              controls
               style={{
                 width: '100%',
                 height: 'auto',
@@ -559,8 +561,10 @@ export default function ChatDemo() {
                 borderRadius: '12px',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
               }}
+              onError={(e) => console.error('Video error:', e)}
             >
               <source src="/video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -839,14 +843,18 @@ export default function ChatDemo() {
                     muted
                     loop
                     playsInline
+                    preload="metadata"
+                    controls
                     style={{
                       width: '100%',
                       height: '180px',
                       borderRadius: '8px',
                       objectFit: 'cover'
                     }}
+                    onError={(e) => console.error('Video error:', e)}
                   >
                     <source src="/anim.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
