@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run vercel-build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
@@ -8,11 +8,6 @@
       "destination": "/index.html"
     }
   ],
-  "functions": {
-    "api/video-proxy.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
       "source": "/assets/(.*)",
