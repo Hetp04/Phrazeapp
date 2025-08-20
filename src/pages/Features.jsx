@@ -200,13 +200,6 @@ export default function Features() {
                     preload="auto"
                     onError={(e) => {
                       console.error('Ant video error:', e);
-                      console.error('Ant video error details:', {
-                        error: e.target.error,
-                        networkState: e.target.networkState,
-                        readyState: e.target.readyState,
-                        src: e.target.src,
-                        currentSrc: e.target.currentSrc
-                      });
                     }}
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}
@@ -492,13 +485,6 @@ export default function Features() {
                     preload="auto"
                     onError={(e) => {
                       console.error('Hi video error:', e);
-                      console.error('Hi video error details:', {
-                        error: e.target.error,
-                        networkState: e.target.networkState,
-                        readyState: e.target.readyState,
-                        src: e.target.src,
-                        currentSrc: e.target.currentSrc
-                      });
                     }}
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => console.log('Video can play')}

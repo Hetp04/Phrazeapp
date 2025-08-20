@@ -833,13 +833,6 @@ export default function ChatDemo() {
                     }}
                     onError={(e) => {
                       console.error('Anim video error:', e);
-                      console.error('Anim video error details:', {
-                        error: e.target.error,
-                        networkState: e.target.networkState,
-                        readyState: e.target.readyState,
-                        src: e.target.src,
-                        currentSrc: e.target.currentSrc
-                      });
                     }}
                     onLoadStart={() => console.log('Video loading started')}
                     onCanPlay={() => {
@@ -852,7 +845,7 @@ export default function ChatDemo() {
                     Your browser does not support the video tag.
                   </video>
                   <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginTop: '8px' }}>
-                    Video: /anim.mp4 (check console for loading status)
+                    Video: anim.mp4
                   </div>
                 </div>
               </div>
